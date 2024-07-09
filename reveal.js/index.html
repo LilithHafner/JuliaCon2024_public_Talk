@@ -75,8 +75,13 @@ slides
 
 # Problem
 
-- Public not exported, with docstring
-- Internal, with docstring
+
+<p style="text-align: left">Public not exported, with docstring</p>
+
+<p style="text-align: center">vs.</p>
+
+<p style="text-align: right">Internal, with docstring</p>
+
 - Ambiguous API
 - Discourages documentation of internals
 
@@ -109,17 +114,46 @@ This will appear in the 1.11 Julia release.
 
 # Package author deployment
 
-- Mark public, unexported symbols with the `public` keyword
+- Mark public, unexported symbols with `public`
 - You probably don't need to do anything
 - If you don't do the thing, it will be okay
 - Compatability with older versions of Julia
 
 ---
 
+# Implementing in a non-breaking way
+- Macro
+- Extension of `export`
+- Conditional parsing
+- PkgEval
+
+---
+
+# Technical details
+- Internal object representation
+- `names`
+- bike shedding
+- Redefining Julia's API
+- Nested publicity
+
+---
+
+# Future work
+
+- Traits/Abstract Types/Interfaces
+- More formal specs
+- Continuing to clarify docstrings
+- Marking symbols public where appropriate
+
+---
+
 # Acknowledgements
 
 - Clair Foster
-- Reviewers of <a href="https://github.com/JuliaLang/julia/pull/50105"><https://github.com/JuliaLang/julia/pull/50105</a>
+  - Inspiration
+  - Code review
+  - Parsing
+- Reviewers of <a href="https://github.com/JuliaLang/julia/pull/50105">https://github.com/JuliaLang/julia/pull/50105</a>
 - Folks who have already marked symbols public
 
 ---
