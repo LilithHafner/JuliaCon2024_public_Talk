@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>Python.jl</title>
+		<title>The public keyword</title>
 
 		<link rel="stylesheet" href="dist/reset.css">
 		<link rel="stylesheet" href="dist/reveal.css">
@@ -31,7 +31,7 @@
 			<div class="slides">
 				<section data-markdown>
 					<textarea data-template>
-# Python.jl
+# <nobr>The public keyword</nobr>
 
 <div style="display: inline-block; vertical-align: middle">
 Lilith Hafner (She/Her)
@@ -45,134 +45,86 @@ slides
 </div>
 ---
 
-# Python.jl
-
-- Seamlessly blend Python & Julia
-
-
-- Hint: you want a seam
-
----
-
-# Demo
-
-<!--
-
-julia> import Pkg; Pkg.add(url="https://github.com/LilithHafner/Jokes", subdir="Python"); using Python
-
-julia> for i in range(7):
-           println(i)
-
-julia> class RandNear:
-	def __init__(self, x):
-		self.x = x
-
-	def gen(self, T):
-		return self.x + rand(T)
-
-julia> rn = RandNear(1000)
-
-julia> rn.gen(Float64)
-1000.2156545877635
-
-julia> rn.gen(Int8)
-932
-
-julia> my_range = range(100);
-
-julia> @time sum(my_range)
-  0.006405 seconds (2.37 k allocations: 146.750 KiB, 99.26% compilation time)
-4950
-
-julia> my_range = range(1000000000);
-
-julia> @time sum(my_range)
-  0.000004 seconds (1 allocation: 16 bytes)
-499999999500000000
-
-julia> from tkinter import *
-
-julia> window = Tk()
-
-julia> window.title("Python.jl!")
-""
-
-julia> window.mainloop()
-
-julia> using Plots # <-- Don't forget!!!
--->
-
-```julia
-import Pkg
-Pkg.add(url="https://github.com/LilithHafner/Jokes", subdir="Python")
-using Python
-```
-
----
-
-
-# Role of Python.jl
-
-- New frontend for PythonCall.jl
-- Leaning all the way into automagical
-
-<!--Scale-->
+# Case Study
 
 <div class="r-stack">
 <div class="fragment current-visible">
 
-## Great
-- Demos
-- Sales pitches
-</div>
+- Is `Base.isexpr` part of the public API of Julia?
+- Is `Base.print_matrix` part of the public API of Julia?
 
-<div class="fragment current-visible">
-
-## Okay
-- Scripts
 </div>
 
 <div class="fragment">
 
-## Needs work
-- Shared use
-- Packages
-- Compatibility with ecosystem
-- Bugs and edge cases
+- How do you know?
+- How would you find out?
+
 </div>
 </div>
 
 ---
 
-# How it works
+# Background
 
-- Split runtime
-- Dual Parser
-- Shared globals
-- Conversion
-- Auto-launch
-- 200 lines of code
+- Stability
+- API
+- Communication
 
 ---
 
-# Is this a Joke?
+# Problem
 
-- Yes
-- No
-
----
-
-# Lessons learned
-
-- Julia is incredibly hackable
-- Magic looks cool, but is hard to make robust
-
-<!-- Back to demo slide -->
-<!-- Acknowledgements (Christopher Rowley) -->
+- Public not exported, with docstring
+- Internal, with docstring
+- Ambiguous API
+- Discourages documentation of internals
 
 ---
 
-# Questions!
+# Solution
+
+- Decouple API and namespace
+- `public` keyword
+- Behaves like `export`, but is semantically a no-op
+- Introspectable with `Base.ispublic`
+- Gives a clear answer to the case study
+- Supports tooling
+
+---
+
+# 1.11
+
+This will appear in the 1.11 Julia release.
+
+---
+
+# Interpretation
+
+- `export`ed things are `public` automatically
+- API = `public` ∩ documented behavior
+- Read the dostrings, they'll tell you all you need to know
+
+---
+
+# Package author deployment
+
+- Mark public, unexported symbols with the `public` keyword
+- You probably don't need to do anything
+- If you don't do the thing, it will be okay
+- Compatability with older versions of Julia
+
+---
+
+# Acknowledgements
+
+- Clair Foster
+- Reviewers of <a href="https://github.com/JuliaLang/julia/pull/50105"><https://github.com/JuliaLang/julia/pull/50105</a>
+- Folks who have already marked symbols public
+
+---
+
+# Questions?
 
 					</textarea>
 				</section>
