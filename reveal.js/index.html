@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Python.jl</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/moon.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+		<style type="text/css">
+			p { text-align: left; }
+
+			.code-wrapper {
+				width: max-content !important;
+			}
+			.reveal pre code {
+				max-height: unset !important;
+				overflow: visible;
+			}
+		</style>
+
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-markdown>
+					<textarea data-template>
+# Python.jl
+
+<div style="display: inline-block; vertical-align: middle">
+Lilith Hafner (She/Her)
+
+Independent Researcher
+</div>
+<div style="display: inline-block; vertical-align: middle; padding: 20pt">
+<a href="https://raw.githack.com/LilithHafner/JuliaCon2024_Python_Talk/main/reveal.js/index.html"><img src="qr.png" alt="QR code for the slides"></a>
+<br>
+slides
+</div>
+---
+
+# Python.jl
+
+- Seamlessly blend Python & Julia
+
+
+- Hint: you want a seam
+
+---
+
+# Demo
+
+<!--
+
+julia> import Pkg; Pkg.add(url="https://github.com/LilithHafner/Jokes", subdir="Python"); using Python
+
+julia> for i in range(7):
+           println(i)
+
+julia> class RandNear:
+	def __init__(self, x):
+		self.x = x
+
+	def gen(self, T):
+		return self.x + rand(T)
+
+julia> rn = RandNear(1000)
+
+julia> rn.gen(Float64)
+1000.2156545877635
+
+julia> rn.gen(Int8)
+932
+
+julia> my_range = range(100);
+
+julia> @time sum(my_range)
+  0.006405 seconds (2.37 k allocations: 146.750 KiB, 99.26% compilation time)
+4950
+
+julia> my_range = range(1000000000);
+
+julia> @time sum(my_range)
+  0.000004 seconds (1 allocation: 16 bytes)
+499999999500000000
+
+julia> from tkinter import *
+
+julia> window = Tk()
+
+julia> window.title("Python.jl!")
+""
+
+julia> window.mainloop()
+
+julia> using Plots # <-- Don't forget!!!
+-->
+
+```julia
+import Pkg
+Pkg.add(url="https://github.com/LilithHafner/Jokes", subdir="Python")
+using Python
+```
+
+---
+
+
+# Role of Python.jl
+
+- New frontend for PythonCall.jl
+- Leaning all the way into automagical
+
+<!--Scale-->
+
+<div class="r-stack">
+<div class="fragment current-visible">
+
+## Great
+- Demos
+- Sales pitches
+</div>
+
+<div class="fragment current-visible">
+
+## Okay
+- Scripts
+</div>
+
+<div class="fragment">
+
+## Needs work
+- Shared use
+- Packages
+- Compatibility with ecosystem
+- Bugs and edge cases
+</div>
+</div>
+
+---
+
+# How it works
+
+- Split runtime
+- Dual Parser
+- Shared globals
+- Conversion
+- Auto-launch
+- 200 lines of code
+
+---
+
+# Is this a Joke?
+
+- Yes
+- No
+
+---
+
+# Lessons learned
+
+- Julia is incredibly hackable
+- Magic looks cool, but is hard to make robust
+
+<!-- Back to demo slide -->
+<!-- Acknowledgements (Christopher Rowley) -->
+
+---
+
+# Questions!
+
+					</textarea>
+				</section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				margin: 0.1,
+//				width: '90%',
+//				height: '50%',
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
