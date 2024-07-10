@@ -121,6 +121,21 @@ This will appear in the 1.11 Julia release.
 
 ---
 
+```julia
+module Iterators
+
+using Base: enumerate, zip, rest
+
+export enumerate, zip, rest, countfrom, take, drop, takewhile, dropwhile
+public accumulate, filter, map, peel, reverse, Stateful
+
+...
+
+end
+```
+
+---
+
 # Implementing in a non-breaking way
 - Macro
 - Extension of `export`
@@ -144,6 +159,9 @@ This will appear in the 1.11 Julia release.
 - More formal specs
 - Continuing to clarify docstrings
 - Marking symbols public where appropriate
+- Behavior not tied to symbols
+- Marking fields of a struct public
+- Disabling access to internals by default
 
 ---
 
